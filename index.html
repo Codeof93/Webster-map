@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Webster NY Interactive Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  
+  <style>
+    body, html {
+      margin: 0;
+      height: 100%;
+    }
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+  // Define the map and set view to the center of the bounding box
+  var map = L.map('map').setView([43.214, -77.466], 14);
+
+  // Add OpenStreetMap tile layer
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  // Define a rectangle covering the area you specified
+  var bounds = [
+    [43.229, -77.493], // Northwest corner (Lake Rd and Phillips Rd)
+    [43.203, -77.431]  // Southeast corner (State Rd and Holt Rd)
+  ];
+
+  // Draw the rectangle
+  L.rectangle(bounds, {color: "#ff7800", weight: 2, fillOpacity: 0.1}).addTo(map);
+
+  // Fit the map to the rectangle
+  map.fitBounds(bounds);
+</script>
+
+</body>
+</html>
